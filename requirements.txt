@@ -1,0 +1,4 @@
+tapipy
+pandas
+pandas_bokeh
+matplotlib
