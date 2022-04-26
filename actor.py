@@ -75,7 +75,7 @@ def create_dataframe(csv_data):
     """
     inp = StringIO(str(csv_data, 'utf-8'))
     df = pd.read_csv(inp)
-    df['datetime']=pd.to_datetime(df['_time'])
+    df['datetime']=pd.to_datetime(df['time'])
     df.set_index('datetime',inplace=True)
     print(df)
     return df
@@ -140,7 +140,7 @@ def main():
         print("Site ID: "+ str(site_id))
         inst_id = d['inst_id']
         print("Instrument ID: "+ str(inst_id))
-        time = d['_time']
+        time = d['time']
         print("Time: "+ str(time))
     except KeyError as ke:
         print(f"Required field missing: {ke}")
