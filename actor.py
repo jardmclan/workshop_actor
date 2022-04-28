@@ -14,7 +14,6 @@ import pandas as pd
 
 from tapipy.tapis import Tapis
 from tapipy.actors import get_context
-from tapipy.actors import get_client
 
 
 # location to write output file -
@@ -23,9 +22,7 @@ out = '/home/tapis/output.png'
 # create Tapis client and get tokens --
 try:
     this_context = get_context()
-    t = Tapis(base_url=this_context["_abaco_api_server"], access_token=this_context['_abaco_access_token'])
-    t.access_token.expires_in()
-
+    t = Tapis(base_url="https://training.tapis.io", access_token=this_context['_abaco_access_token'])
     print("Access Token:" + str(t.access_token))
 except Exception as e:
     print(f"got exception trying to generate tapis client; e: {e}")
@@ -109,8 +106,8 @@ def upload_plot(time):
         print("System ID: " + system_id)
         print("Dest PATH: " + dest_path)
         print("Base URL: " + t.base_url)
-        print("OUt file: " + out)
-        url = t.base_url+'v3/files/ops/'+system_id+'/'+dest_path
+        print("Out file: " + out)
+        url = t.base_url+'/v3/files/ops/'+system_id+'/'+dest_path
         print('FILES URL: '+ url)
         headers={}
         headers["X-Tapis-Token"] = t.access_token.access_token
@@ -140,7 +137,7 @@ def main():
         print("Site ID: "+ str(site_id))
         inst_id = d['inst_id']
         print("Instrument ID: "+ str(inst_id))
-        time = d['time']
+        time = d['_time']
         print("Time: "+ str(time))
     except KeyError as ke:
         print(f"Required field missing: {ke}")
